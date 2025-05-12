@@ -1,14 +1,14 @@
 "use client";
 
-import { type Attachment, type Message } from "ai";
-import { useChat } from "ai/react";
-import { useState } from "react";
+import { type Message } from "ai";
+import { useChat } from "@ai-sdk/react";
 
 import { Message as PreviewMessage } from "~/components/custom/message";
 import { useScrollToBottom } from "~/components/custom/use-scroll-to-bottom";
 
-import { MultimodalInput } from "./multimodal-input";
-import { Overview } from "./overview";
+import { ArrowUpIcon } from "./icons";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export function Chat({
   id,
@@ -17,30 +17,35 @@ export function Chat({
   id: string;
   initialMessages: Array<Message>;
 }) {
-  const { messages, handleSubmit, input, setInput, append, isLoading, stop } =
+  // const { messages, handleSubmit, input, handleInputChange, append, isLoading, stop } =
+  //   useChat({
+  //     id,
+  //     body: { id },
+  //     initialMessages,
+  //     maxSteps: 10,
+  //     onFinish: () => {
+  //       window.history.replaceState({}, "", `/chat/${id}`);
+  //     },
+  //   });
+  const { messages, input, handleInputChange, handleSubmit } =
     useChat({
       id,
-      body: { id },
       initialMessages,
       maxSteps: 10,
       onFinish: () => {
         window.history.replaceState({}, "", `/chat/${id}`);
-      },
+      }
     });
 
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
 
-  const [attachments, setAttachments] = useState<Array<Attachment>>([]);
-
   return (
-    <div className="bg-background flex h-dvh flex-row justify-center pb-4 md:pb-8">
+    <div className="bg-background flex flex-row justify-center pb-4 md:pb-8">
       <div className="flex flex-col items-center justify-between gap-4">
         <div
           ref={messagesContainerRef}
-          className="flex h-full w-dvw flex-col items-center gap-4 overflow-y-scroll"
+          className="flex h-full w-full flex-col items-center gap-4"
         >
-          {messages.length === 0 && <Overview />}
-
           {messages.map((message) => (
             <PreviewMessage
               key={message.id}
@@ -58,18 +63,30 @@ export function Chat({
           />
         </div>
 
-        <form className="max-w-[calc(100dvw-32px) relative flex w-full flex-row items-end gap-2 px-4 md:max-w-[500px] md:px-0">
-          <MultimodalInput
-            input={input}
-            setInput={setInput}
-            handleSubmit={handleSubmit}
-            isLoading={isLoading}
-            stop={stop}
-            attachments={attachments}
-            setAttachments={setAttachments}
-            messages={messages}
-            append={append}
-          />
+        <form className="sticky bottom-8 max-w-[calc(100dvw-32px) relative flex w-full flex-row items-end gap-2 px-4 md:max-w-[500px] md:px-0">
+          <div className="relative flex w-full flex-col gap-4">
+            <Textarea
+              placeholder="Send a message..."
+              value={input}
+              onChange={handleInputChange}
+              className="bg-muted min-h-2 text-[#f1f1f1] p-2 resize-none overflow-hidden rounded-lg border-none text-base"
+              rows={3}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault();
+                  handleSubmit();
+                }
+              }}
+            />
+            <Button
+              className="absolute hover:text-black bg-accent-slate-600 right-2 bottom-1 m-0.5 h-fit rounded-full p-1.5 text-white"
+              type="submit"
+              onSubmit={handleSubmit}
+              disabled={input.length === 0}
+            >
+              <ArrowUpIcon size={14} />
+            </Button>
+          </div>
         </form>
       </div>
     </div>
