@@ -63,30 +63,29 @@ export function Chat({
           />
         </div>
 
-        <form className="sticky bottom-8 max-w-[calc(100dvw-32px) relative flex w-full flex-row items-end gap-2 px-4 md:max-w-[500px] md:px-0">
-          <div className="relative flex w-full flex-col gap-4">
-            <Textarea
-              placeholder="Send a message..."
-              value={input}
-              onChange={handleInputChange}
-              className="bg-muted min-h-2 text-[#f1f1f1] p-2 resize-none overflow-hidden rounded-lg border-none text-base"
-              rows={3}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  handleSubmit();
-                }
-              }}
-            />
-            <Button
-              className="absolute hover:text-black bg-accent-slate-600 right-2 bottom-1 m-0.5 h-fit rounded-full p-1.5 text-white"
-              type="submit"
-              onSubmit={handleSubmit}
-              disabled={input.length === 0}
-            >
-              <ArrowUpIcon size={14} />
-            </Button>
-          </div>
+        <form className="sticky bottom-8 bg-muted rounded-lg flex w-full h-full flex-row items-center justify-center gap-2 py-1 px-4">
+          {/*<div className="relative flex w-full flex-col gap-4">*/}
+          <Textarea
+            placeholder="Send a message..."
+            value={input}
+            onChange={handleInputChange}
+            className="bg-muted w-full max-w-md text-[#f1f1f1] p-2 resize-none overflow-y-clip rounded-lg border-none text-base"
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                handleSubmit();
+              }
+            }}
+          />
+          <Button
+            className="hover:text-black bg-accent-slate-600 m-0.5 h-fit rounded-full p-1.5 text-white"
+            type="submit"
+            onSubmit={handleSubmit}
+            disabled={input.length === 0}
+          >
+            <ArrowUpIcon size={14} />
+          </Button>
+          {/*</div>*/}
         </form>
       </div>
     </div>
