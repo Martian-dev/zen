@@ -28,7 +28,7 @@ export const Message = ({
         {role === "assistant" ? <BotIcon /> : <UserIcon />}
       </div>
 
-      <div className="flex w-full flex-col gap-2">
+      <div className="text-wrap flex w-full flex-col gap-2">
         {content && typeof content === "string" && (
           <div className="flex flex-col gap-4 text-zinc-800 dark:text-zinc-300">
             <Markdown>{content}</Markdown>

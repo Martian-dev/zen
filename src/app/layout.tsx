@@ -37,7 +37,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <body className={`${geist.variable} ${geistMono.variable} antialiased dark text-white`}>
-          <header className="fixed top-0 w-full bg-[#0d0c0c] text-white flex justify-end items-center p-4 gap-4 h-16">
+          <header className="fixed top-0 w-full flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton>
                 <Button className="hover:cursor-pointer" variant="outline">Sign In</Button>

@@ -40,7 +40,7 @@ export function Chat({
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
 
   return (
-    <div className="bg-background flex flex-row justify-center pb-4 md:pb-8">
+    <div className="flex flex-row justify-center pb-4 md:pb-8">
       <div className="flex flex-col items-center justify-between gap-4">
         <div
           ref={messagesContainerRef}
@@ -63,13 +63,12 @@ export function Chat({
           />
         </div>
 
-        <form className="sticky bottom-8 bg-muted rounded-lg flex w-full h-full flex-row items-center justify-center gap-2 py-1 px-4">
-          {/*<div className="relative flex w-full flex-col gap-4">*/}
+        <div className="relative flex w-full items-center gap-4">
           <Textarea
             placeholder="Send a message..."
             value={input}
             onChange={handleInputChange}
-            className="bg-muted w-full max-w-md text-[#f1f1f1] p-2 resize-none overflow-y-clip rounded-lg border-none text-base"
+            className="w-[30vw] pr-14 overflow-y-auto text-white resize-none active:border-none focus:border-none"
             onKeyDown={(event) => {
               if (event.key === "Enter" && !event.shiftKey) {
                 event.preventDefault();
@@ -78,15 +77,14 @@ export function Chat({
             }}
           />
           <Button
-            className="hover:text-black bg-accent-slate-600 m-0.5 h-fit rounded-full p-1.5 text-white"
+            className="hover:text-black -translate-x-18 bg-accent-slate-600 m-0.5 h-fit rounded-full p-1.5 text-white"
             type="submit"
             onSubmit={handleSubmit}
             disabled={input.length === 0}
           >
             <ArrowUpIcon size={14} />
           </Button>
-          {/*</div>*/}
-        </form>
+        </div>
       </div>
     </div>
   );
