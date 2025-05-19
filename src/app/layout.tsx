@@ -5,14 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from '@clerk/nextjs'
 import { dark } from "@clerk/themes";
-
-import { Button } from "~/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Zen",
@@ -37,16 +31,6 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <body className={`${geist.variable} ${geistMono.variable} antialiased dark text-white`}>
-          <header className="fixed top-0 w-full flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton>
-                <Button className="hover:cursor-pointer" variant="outline">Sign In</Button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
           {children}
         </body>
       </html>
