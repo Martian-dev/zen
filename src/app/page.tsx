@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center dark">
       {/*<Chat key={id} id={id} initialMessages={[]} />*/}
-      <ChatInterface />
+      <ChatInterface key={id} id={id} initialMessages={[]} />
     </main>
   );
 }
