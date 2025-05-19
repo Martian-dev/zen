@@ -16,7 +16,7 @@ export const createTable = pgTableCreator((name) => `zen_${name}`);
 // const priorityEnum = pgEnum("priorityEnum", ["P1", "P2", "P3", "P4", "P5"]);
 
 export const tasks = createTable(
-  "Task",
+  "tasks",
   (d) => ({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     title: d.varchar({ length: 70 }).notNull(),
@@ -37,7 +37,7 @@ export const tasks = createTable(
   ],
 );
 
-export const chats = createTable("Chats", (d) => ({
+export const chats = createTable("chats", (d) => ({
   id: d.uuid().primaryKey().notNull().defaultRandom(),
   createdAt: d.timestamp({ withTimezone: true }).default(sql`CURRENT_TIMESTAMP`).notNull(),
   messages: json().notNull(),
