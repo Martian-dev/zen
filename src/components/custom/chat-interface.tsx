@@ -76,7 +76,7 @@ export default function ChatInterface({
     <>
       <div
         ref={messagesContainerRef}
-        className="w-full flex-grow overflow-y-auto pt-4 pb-32" // removed px-4, added w-full
+        className="w-full flex-grow overflow-y-auto pt-4 pb-28" // removed px-4, added w-full
       >
         <div className="mx-auto max-w-3xl space-y-4 px-4 text-left text-wrap">
           {" "}
