@@ -2,13 +2,17 @@ import type { CoreMessage } from "ai";
 import { notFound } from "next/navigation";
 
 import { auth } from "@clerk/nextjs/server";
-import { Chat as PreviewChat } from "~/components/custom/chat";
+import ChatInterface from "~/components/custom/chat-interface";
 import { getChatById } from "~/server/db/queries";
 import type { Chat } from "~/server/db/schema";
 import { convertToUIMessages } from "~/lib/utils";
 import type { UUID } from "crypto";
 
-export default async function Page({ params }: { params: Promise<{ id: UUID }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: UUID }>;
+}) {
   const { id } = await params;
   const chatFromDb = await getChatById({ id });
 
@@ -32,5 +36,5 @@ export default async function Page({ params }: { params: Promise<{ id: UUID }> }
     return notFound();
   }
 
-  return <PreviewChat id={chat.id} initialMessages={chat.messages} />;
+  return <ChatInterface id={chat.id} initialMessages={chat.messages} />;
 }

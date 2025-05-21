@@ -20,7 +20,7 @@ export const Message = ({
 }) => {
   return (
     <motion.div
-      className={`flex w-full flex-row gap-4 px-4 first-of-type:pt-20 md:w-[500px] md:px-0`}
+      className="flex w-full flex-row gap-4 px-4 first-of-type:pt-20 md:px-0 justify-center" // add justify-center, remove md:w-[500px]
       initial={{ y: 5, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
@@ -28,7 +28,7 @@ export const Message = ({
         {role === "assistant" ? <BotIcon /> : <UserIcon />}
       </div>
 
-      <div className="text-wrap flex w-full flex-col gap-2">
+      <div className="flex w-full flex-col gap-2 break-words whitespace-pre-wrap text-wrap">
         {content && typeof content === "string" && (
           <div className="flex flex-col gap-4 text-zinc-800 dark:text-zinc-300">
             <Markdown>{content}</Markdown>
